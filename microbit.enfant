@@ -1,0 +1,16 @@
+# Imports go at the top
+from microbit import *
+import radio
+radio.config(group=2)
+radio.on()
+
+# Code in a 'while True:' loop repeats forever
+while True:
+    message = radio.receive()
+    if message:
+        display.scroll(message)
+        for i in range(10):                
+            y = y_strength = accelerometer.get_y()
+            x = x_strength = accelerometer.get_x()
+            if x<400 and x>-400 and y >-300 and y> 300:
+                radio.send("5")
