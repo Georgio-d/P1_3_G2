@@ -1,0 +1,16 @@
+# Imports go at the top
+from microbit import *
+import radio
+radio.on()
+radio.config(group=2)
+
+while True:
+    if button_a.was_pressed():
+        radio.send('hello')
+        message = radio.receive()
+        print(message)
+        for i in range(5):
+            if message is None:    
+                print("autre mb ne rep pas")
+            else:
+                display.scroll(message)
