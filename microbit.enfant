@@ -1,16 +1,34 @@
 # Imports go at the top
 from microbit import *
 import radio
-radio.config(group=2)
+radio.config(channel=7, address=0x12345678, group=200)
 radio.on()
 
 # Code in a 'while True:' loop repeats forever
 while True:
     message = radio.receive()
     if message:
+        print(message)
         display.scroll(message)
-        for i in range(10):                
+        x_total = 0
+        y_total = 0
+        for i in range(100):
             y = y_strength = accelerometer.get_y()
+            y_total+= y
             x = x_strength = accelerometer.get_x()
-            if x<400 and x>-400 and y >-300 and y> 300:
-                radio.send("5")
+            x_total+= x
+            sleep(10)
+        y_moy = y_total / 100
+        x_moy = x_total / 100
+        print(x_moy)
+        print(y_moy) 
+        if x_moy <500 and x_moy>-500 and y_moy>-300 and y_moy<300:
+            print("send")
+            radio.send("4")
+        elif x_moy>-800 and x_moy<800 and y_moy < 500 and y_moy > -500:
+            print("agite")
+            radio.send("5")
+        else:
+            print("tres agite")
+            radio.send("9")
+            
