@@ -62,7 +62,7 @@ def interpreter_message(type_msg, contenu):
     if type_msg == 0x01:
         print("Connexion, challenge reçu : " + contenu)
     elif type_msg == 0x02:
-        print("Lait : " + contenu + " doses") #le contenu est la quantité de biberons
+        print("Lait : " + contenu + " mL") #le contenu est la quantité de biberons
         #Exemple : le parent a fait 3 biberons. Il envoie "2|1|3"
         #L'enfant le décode (type_msg = 2, contenu = "3") et cette branche affiche Lait : 3 doses.
     elif type_msg == 0x03:
